@@ -8,8 +8,10 @@ import Buttons from '../../../helpers/molecules/Button';
 import COLORS from '../../../helpers/molecules/color';
 import {Height} from '../../../helpers/molecules/dimension';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {saveToken} from './action';
+import {connect} from 'react-redux';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({navigation, saveToken}) => {
   const [LoginData, setLoginData] = useState({
     Email: '',
     password: '',
@@ -49,6 +51,7 @@ const LoginScreen = ({navigation}) => {
     await AsyncStorage.setItem('userToken', userToken)
       .then(() => {
         console.log('User token saved successfully.');
+        saveToken(userToken);
       })
       .catch(error => {
         console.error('Error saving user token:', error);
@@ -136,4 +139,13 @@ const LoginScreen = ({navigation}) => {
   );
 };
 
-export default LoginScreen;
+const mapStateToProps = state => ({
+  isSuccess: state.SaveToken.isSuccess,
+  data: state.SaveToken.token,
+});
+
+const mapDispatchToProps = {
+  saveToken,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
