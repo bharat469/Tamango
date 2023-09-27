@@ -8,12 +8,16 @@
 import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import Navigation from './src/helpers/navigation';
+import {Provider} from 'react-redux';
+import store from './src/helpers/redux/store';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar />
-      <Navigation />
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
     </SafeAreaView>
   );
 };

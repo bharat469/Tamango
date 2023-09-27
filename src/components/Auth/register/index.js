@@ -226,7 +226,7 @@ const Register = ({navigation}) => {
         gallery={() => openGallery()}
         cameraOpen={() => openCamera()}
       />
-      <View></View>
+
     </View>
   );
 };
