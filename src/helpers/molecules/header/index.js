@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import COLORS from '../color';
-import { Height } from '../dimension';
+import {Height} from '../dimension';
 
 const Header = props => {
   return (
@@ -32,6 +32,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: COLORS.whiteColor,
-    fontSize:Height(3),
-  }
+    fontSize: Height(3),
+  },
 });
