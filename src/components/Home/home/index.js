@@ -4,28 +4,23 @@ import Buttons from '../../../helpers/molecules/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Height, Width} from '../../../helpers/molecules/dimension';
 import COLORS from '../../../helpers/molecules/color';
+import {useDispatch} from 'react-redux';
+import {deleteToken} from '../../Auth/Login/action';
+import CardStack from '../../../helpers/molecules/card';
 
-const Home = () => {
-  const Logout = async () => {
-    // Clear the user token from AsyncStorage
-    await AsyncStorage.removeItem('userToken')
-      .then(() => {
-        console.log('User token cleared successfully.');
-      })
-      .catch(error => {
-        console.error('Error clearing user token:', error);
-      });
-  };
-
+const Home = ({navigation}) => {
+  const dispatch = useDispatch();
+  const cardData = [
+    {name: 'Tony', image: require('../../../assets/home/image1.jpg')},
+    {name: 'Money', image: require('../../../assets/home/image2.jpg')},
+    {name: 'Roney', image: require('../../../assets/home/image3.jpg')},
+    {name: 'Poney', image: require('../../../assets/home/image4.jpg')},
+    {name: 'chinki', image: require('../../../assets/home/image5.jpg')},
+    // Add more card data here
+  ];
   return (
-    <View>
-      <Text>Home</Text>
-      <Buttons
-        buttonName={'Logout'}
-        btnStyle={styles.btnName}
-        btnText={styles.btnText}
-        onPress={() => Logout()}
-      />
+    <View style={styles.HomeStyle}>
+      <CardStack data={cardData} />
     </View>
   );
 };
@@ -33,20 +28,8 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
-  btnName: {
-    backgroundColor: COLORS.PrimaryColor,
-    padding: 12,
-    height: Height(7),
-    width: Width(60),
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: Width(15),
-    marginTop: Height(2),
-    borderRadius: 12,
-  },
-  btnText: {
-    color: COLORS.whiteColor,
-    fontSize: Height(2.5),
-    textAlign: 'center',
+  HomeStyle: {
+    flex: 1,
+    // alignItems: 'center',
   },
 });

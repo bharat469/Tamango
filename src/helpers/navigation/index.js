@@ -4,20 +4,23 @@ import {NavigationContainer} from '@react-navigation/native';
 import AuthenticationStack from './authNavigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeNavigation from './HomeNavigation';
-import {connect} from 'react-redux';
 import {saveToken} from '../../components/Auth/Login/action';
+import {useSelector, useDispatch} from 'react-redux';
 
 const Navigation = props => {
   const [token, setToken] = useState(null);
-  console.log('skhdjs', props.token);
+  const Tokenn = useSelector(state => state.SaveToken.token);
+  const isAuthenticate = useSelector(state => state.SaveToken.isAuthenticate);
 
+  const dispatch = useDispatch();
   const GetTokenUser = async () => {
     // Retrieve the user token from AsyncStorage
     await AsyncStorage.getItem('userToken')
       .then(token => {
         if (token) {
+          console.log('akdhjah', token);
           setToken(token);
-          props.saveToken(token);
+          dispatch(saveToken(token));
         } else {
           // Token not found, handle the case accordingly
           console.log('User token not found.');
@@ -30,21 +33,13 @@ const Navigation = props => {
 
   useEffect(() => {
     GetTokenUser();
-  }, [token]);
+  }, [Tokenn]);
 
   return (
     <NavigationContainer>
-      {props.token ? <HomeNavigation /> : <AuthenticationStack />}
+      {isAuthenticate || Tokenn ? <HomeNavigation /> : <AuthenticationStack />}
     </NavigationContainer>
   );
 };
 
-const mapStateToProps = state => ({
-  isSuccess: state.SaveToken.isSuccess,
-  token: state.SaveToken.token,
-});
-
-const mapDispatchToProps = {
-  saveToken,
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default Navigation;
