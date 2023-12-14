@@ -65,8 +65,6 @@ const LoginScreen = ({navigation, saveToken}) => {
       // Perform login logic here
       const email = 'Joshibharat469@gmail.com';
       const password = 'Bharat@123';
-      console.log(LoginData.Email === email);
-      console.log(LoginData.password);
       if (email === LoginData.Email && password === LoginData.password) {
         UserTokenSet();
       } else {

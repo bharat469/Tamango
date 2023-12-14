@@ -1,32 +1,28 @@
 import * as actiontype from './constant';
 
 const initialState = {
-  token: '',
+  token: null,
   isFailure: false,
   isSuccess: false,
   isLoading: false,
+  isAuthenticate: false,
 };
 
 export const SaveTokenReducer = (state = initialState, action) => {
-  console.log('DKHJ', action.payload);
   switch (action.type) {
-    case actiontype.SAVE_TOKEN_FAILURE:
-      return {
-        ...state,
-        isLoading: true,
-      };
-
-    case actiontype.SAVE_TOKEN_SUCCESS:
+    case actiontype.SAVE_TOKEN:
       return {
         ...state,
         token: action.payload,
         isSuccess: true,
+        isAuthenticate: true,
       };
 
-    case actiontype.SAVE_TOKEN_FAILURE:
+    case actiontype.DELETE_TOKEN:
       return {
         ...state,
-        isFailure: true,
+        token: null,
+        isAuthenticate: false,
       };
 
     default:
