@@ -3,11 +3,11 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../../../components/Home/home';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import PetRegistration from '../../../components/Home/petRegisteration';
 import ProfileScreen from '../../../components/Home/ProfileScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import COLORS from '../../molecules/color';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MatchingScreen from '../../../components/Home/MatchingScreen';
 
 const BottomStack = createBottomTabNavigator();
 
@@ -19,7 +19,7 @@ const BottomTab = () => {
           let iconName;
           if (route.name === 'HomeScreen') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'PetForm') {
+          } else if (route.name === 'MatchScreen') {
             iconName = focused ? 'paw' : 'paw-outline';
           } else if (route.name === 'ProfileScreen') {
             iconName = focused ? 'document-attach' : 'document-attach-outline';
@@ -37,8 +37,8 @@ const BottomTab = () => {
         options={{headerShown: false}}
       />
       <BottomStack.Screen
-        component={PetRegistration}
-        name="PetForm"
+        component={MatchingScreen}
+        name="MatchScreen"
         options={{headerShown: false}}
       />
       <BottomStack.Screen component={ProfileScreen} name="ProfileScreen" />

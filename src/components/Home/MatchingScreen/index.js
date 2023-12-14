@@ -7,7 +7,7 @@ import {BreedList, PetCategory} from './constantArray';
 import {Width, Height} from '../../../helpers/molecules/dimension';
 import TextInputs from '../../../helpers/molecules/textInput';
 
-const PetRegistration = ({navigation}) => {
+const MatchingScreen = ({navigation}) => {
   const [openDorpdown, setOpenDropdown] = useState({
     petList: false,
     breedOpen: false,
@@ -28,10 +28,10 @@ const PetRegistration = ({navigation}) => {
   const [breedList, setBreedList] = useState(BreedList);
 
   const SelectBreed = () => {
-    if (data.category()) {
+    if (data.category) {
       const filteredBreeds =
-        BreedList.find(category => category.value === data.category())
-          ?.breeds || [];
+        BreedList.find(category => category.value === data.category)?.breeds ||
+        [];
       setBreedList(filteredBreeds);
     } else {
       return null;
@@ -42,8 +42,6 @@ const PetRegistration = ({navigation}) => {
     SelectBreed();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.category]);
-
-  console.log('SJHGJS', breedList);
 
   return (
     <View style={{flex: 1}}>
@@ -63,12 +61,19 @@ const PetRegistration = ({navigation}) => {
                 petList: !openDorpdown.petList,
               })
             }
-            value={data.category()}
+            value={data.category}
             containerStyle={styles.dropdownContainer}
             style={styles.dropdown}
             itemStyle={styles.dropdownItem}
             labelStyle={styles.dropdownLabel}
-            setValue={item => setData({...data, category: item})}
+            setValue={item => {
+              if (typeof item === 'function') {
+                const selectedValue = item();
+                setData({...data, category: selectedValue});
+              } else {
+                setData({...data, category: item.value});
+              }
+            }}
             maxHeight={200}
             autoScroll
             zIndex={999}
@@ -101,7 +106,14 @@ const PetRegistration = ({navigation}) => {
             style={styles.dropdown}
             itemStyle={styles.dropdownItem}
             labelStyle={styles.dropdownLabel}
-            setValue={item => setData({...data, breed: item})}
+            setValue={item => {
+              if (typeof item === 'function') {
+                const selectedValue = item();
+                setData({...data, breed: selectedValue});
+              } else {
+                setData({...data, breed: item.value});
+              }
+            }}
             maxHeight={200}
             autoScroll
             disabled={!data.category}
@@ -112,7 +124,7 @@ const PetRegistration = ({navigation}) => {
   );
 };
 
-export default PetRegistration;
+export default MatchingScreen;
 
 const styles = StyleSheet.create({
   dropdown: {
@@ -123,7 +135,7 @@ const styles = StyleSheet.create({
   },
   dropdownItem: {
     justifyContent: 'flex-start',
-    width: Width('80%'),
+    width: Width('60%'),
   },
   dropdownLabel: {
     fontSize: 16,
