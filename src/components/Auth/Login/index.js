@@ -10,6 +10,7 @@ import {Height} from '../../../helpers/molecules/dimension';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {saveToken} from './action';
 import {connect} from 'react-redux';
+import auth from '@react-native-firebase/auth';
 
 const LoginScreen = ({navigation, saveToken}) => {
   const [LoginData, setLoginData] = useState({
@@ -44,9 +45,7 @@ const LoginScreen = ({navigation, saveToken}) => {
     setErrors(newError);
     return Object.keys(newError).length === 0;
   };
-  const UserTokenSet = async () => {
-    const userToken = 'your-static-token'; // Replace with your actual token
-
+  const UserTokenSet = async userToken => {
     // Save the token to AsyncStorage
     await AsyncStorage.setItem('userToken', userToken)
       .then(() => {
@@ -57,19 +56,21 @@ const LoginScreen = ({navigation, saveToken}) => {
         console.error('Error saving user token:', error);
       });
   };
-
+  console.log('heres');
   const onSubmit = () => {
     const isFormValid = validateForm();
 
     if (isFormValid) {
       // Perform login logic here
-      const email = 'Joshibharat469@gmail.com';
-      const password = 'Bharat@123';
-      if (email === LoginData.Email && password === LoginData.password) {
-        UserTokenSet();
-      } else {
-        Alert.alert('Please check Email/Password !!!');
-      }
+      // if (email === LoginData.Email && password === LoginData.password) {
+      //   UserTokenSet();
+      // } else {
+      //   Alert.alert('Please check Email/Password !!!');
+      // }
+      auth()
+        .signInWithEmailAndPassword(LoginData.Email, LoginData.password)
+        .then(userToken => UserTokenSet(userToken.user.uid))
+        .catch(e => console.log('error is ', e));
     } else {
       console.log('skdks', error);
     }
