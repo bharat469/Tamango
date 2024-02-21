@@ -16,14 +16,16 @@ const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 1,
     width: Width(80),
-    fontSize: Height(2.2),
+    fontSize: Height(1.8),
     borderRadius: 6,
     margin: 12,
+    color: COLORS.blackColor,
+    borderColor: COLORS.blackColor,
   },
   btnName: {
     backgroundColor: COLORS.PrimaryColor,
     padding: 12,
-    height: Height(7),
+    height: Height(5),
     width: Width(60),
     alignItems: 'center',
     justifyContent: 'center',
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: COLORS.whiteColor,
-    fontSize: Height(2.5),
+    fontSize: Height(1.5),
     textAlign: 'center',
   },
   registerView: {
@@ -42,12 +44,12 @@ const styles = StyleSheet.create({
   },
   registerText: {
     color: COLORS.secondaryColor,
-    fontSize: Height(2.3),
+    fontSize: Height(1.6),
     fontWeight: '700',
   },
   registerBtn: {
     color: COLORS.PrimaryColor,
-    fontSize: Height(2.5),
+    fontSize: Height(1.6),
     fontWeight: '800',
   },
 });
