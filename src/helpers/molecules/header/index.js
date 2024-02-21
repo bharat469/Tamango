@@ -11,7 +11,7 @@ const Header = props => {
         <Ionicons
           name="arrow-back-outline"
           size={24}
-          color={COLORS.whiteColor}
+          color={COLORS.secondaryColor}
         />
       </TouchableOpacity>
       <Text style={styles.headerText}>{props.headerName}</Text>
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: COLORS.secondaryColor,
-    padding: 15,
+    backgroundColor: COLORS.whiteColor,
+    padding: 12,
   },
   headerText: {
-    color: COLORS.whiteColor,
-    fontSize: Height(3),
+    color: COLORS.secondaryColor,
+    fontSize: Height(1.9),
   },
 });

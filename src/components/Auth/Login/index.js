@@ -1,6 +1,6 @@
 import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
-import Pet from '../../../assets/loginImage/loginPet.png';
+
 import styles from './styles';
 import TextInputs from '../../../helpers/molecules/textInput';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {saveToken} from './action';
 import {connect} from 'react-redux';
 import auth from '@react-native-firebase/auth';
+import LoginPet from '../../../assets/loginImage/loginPet.svg';
 
 const LoginScreen = ({navigation, saveToken}) => {
   const [LoginData, setLoginData] = useState({
@@ -61,12 +62,6 @@ const LoginScreen = ({navigation, saveToken}) => {
     const isFormValid = validateForm();
 
     if (isFormValid) {
-      // Perform login logic here
-      // if (email === LoginData.Email && password === LoginData.password) {
-      //   UserTokenSet();
-      // } else {
-      //   Alert.alert('Please check Email/Password !!!');
-      // }
       auth()
         .signInWithEmailAndPassword(LoginData.Email, LoginData.password)
         .then(userToken => UserTokenSet(userToken.user.uid))
@@ -78,7 +73,8 @@ const LoginScreen = ({navigation, saveToken}) => {
 
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.loginContainer}>
-      <Image source={Pet} style={styles.loginImage} />
+      {/* <Image source={Pet} style={styles.loginImage} /> */}
+      <LoginPet width={300} height={400} />
       <View>
         <TextInputs
           placeholder="Enter Your Email/Username"
@@ -123,7 +119,6 @@ const LoginScreen = ({navigation, saveToken}) => {
         <Buttons
           buttonName={'Login'}
           btnStyle={styles.btnName}
-          btnText={styles.btnText}
           onPress={() => onSubmit()}
         />
       </View>

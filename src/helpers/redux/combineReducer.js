@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 
-import {RegisterScreenReducer} from '../../components/Auth/register/reducer';
+// import {RegisterScreenReducer} from '../../components/Home/register/reducer';
 import {SaveTokenReducer} from '../../components/Auth/Login/reducer';
 
 const rootReducer = combineReducers({
-  Register: RegisterScreenReducer,
+  // Register: RegisterScreenReducer,
   SaveToken: SaveTokenReducer,
 });
 
