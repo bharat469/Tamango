@@ -9,7 +9,7 @@ import {useSelector, useDispatch} from 'react-redux';
 
 const Navigation = props => {
   const [token, setToken] = useState(null);
-  const Tokenn = useSelector(state => state.SaveToken.token);
+  const Token = useSelector(state => state.SaveToken.token);
   const isAuthenticate = useSelector(state => state.SaveToken.isAuthenticate);
 
   const dispatch = useDispatch();
@@ -33,11 +33,11 @@ const Navigation = props => {
 
   useEffect(() => {
     GetTokenUser();
-  }, [Tokenn]);
+  }, [Token]);
 
   return (
     <NavigationContainer>
-      {isAuthenticate || Tokenn ? <HomeNavigation /> : <AuthenticationStack />}
+      {isAuthenticate || Token ? <HomeNavigation /> : <AuthenticationStack />}
     </NavigationContainer>
   );
 };
