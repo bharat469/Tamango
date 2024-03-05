@@ -57,7 +57,7 @@ const LoginScreen = ({navigation, saveToken}) => {
         console.error('Error saving user token:', error);
       });
   };
-  console.log('heres');
+
   const onSubmit = () => {
     const isFormValid = validateForm();
 
@@ -74,7 +74,7 @@ const LoginScreen = ({navigation, saveToken}) => {
   return (
     <KeyboardAwareScrollView contentContainerStyle={styles.loginContainer}>
       {/* <Image source={Pet} style={styles.loginImage} /> */}
-      <LoginPet width={300} height={400} />
+      <LoginPet width={200} height={300} />
       <View>
         <TextInputs
           placeholder="Enter Your Email/Username"
